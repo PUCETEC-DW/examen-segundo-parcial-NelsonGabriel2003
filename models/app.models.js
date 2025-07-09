@@ -29,7 +29,9 @@ export function actualizarTarea(id, datos) {
   tareas[index] = { ...tareas[index], ...datos };
   return tareas[index];
 }
+//endregion
 
+//region Eliminar Tarea
 export function eliminarTarea(id) {
   const index = tareas.findIndex(tarea => tarea.id === id);
   if (index === -1) return false;
@@ -37,3 +39,4 @@ export function eliminarTarea(id) {
   tareas.splice(index, 1);
   return true;
 }
+//endregion 

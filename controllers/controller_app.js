@@ -1,5 +1,6 @@
 import { crearTareas, obtenerTareas, actualizarTarea,eliminarTarea } from '../models/app.models.js';
 
+//region Crear Tarea
 export function crearTarea(req, res)
  {
   const { title, description, priority } = req.body;
@@ -16,12 +17,18 @@ export function crearTarea(req, res)
 
   return res.status(201).json(tareaCreada);
 }
+//endregion
 
+
+//region listar tarea
 export function listarTareasControlador(req, res) {
   const lista = obtenerTareas();
   return res.status(200).json(lista);
 }
+// endregion
 
+
+//region actualizar
 export function actualizarTareaControlador(req, res) {
   const id = Number(req.params.id);
   if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
@@ -36,7 +43,10 @@ export function actualizarTareaControlador(req, res) {
 
   return res.status(200).json(tareaActualizada);
 }
+// endregion
 
+
+//region EliminarTarea
 export function eliminarTareaControlador(req, res) {
   const id = Number(req.params.id);
   if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
@@ -49,3 +59,4 @@ export function eliminarTareaControlador(req, res) {
 
   return res.status(200).json({ mensaje: 'Tarea eliminada' });
 }
+//endregion
