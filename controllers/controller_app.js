@@ -1,4 +1,4 @@
-import { crearTareas, obtenerTareas } from '../models/app.models.js';
+import { crearTareas, obtenerTareas, actualizarTarea,eliminarTarea } from '../models/app.models.js';
 
 export function crearTarea(req, res)
  {
@@ -20,4 +20,32 @@ export function crearTarea(req, res)
 export function listarTareasControlador(req, res) {
   const lista = obtenerTareas();
   return res.status(200).json(lista);
+}
+
+export function actualizarTareaControlador(req, res) {
+  const id = Number(req.params.id);
+  if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
+
+  const datos = req.body;
+
+  const tareaActualizada = actualizarTarea(id, datos);
+
+  if (!tareaActualizada) {
+    return res.status(404).json({ error: 'Tarea no encontrada' });
+  }
+
+  return res.status(200).json(tareaActualizada);
+}
+
+export function eliminarTareaControlador(req, res) {
+  const id = Number(req.params.id);
+  if (isNaN(id)) return res.status(400).json({ error: 'ID inválido' });
+
+  const eliminado = eliminarTarea(id);
+
+  if (!eliminado) {
+    return res.status(404).json({ error: 'Tarea no encontrada' });
+  }
+
+  return res.status(200).json({ mensaje: 'Tarea eliminada' });
 }

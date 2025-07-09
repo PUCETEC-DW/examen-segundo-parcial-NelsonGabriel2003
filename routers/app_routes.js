@@ -1,9 +1,11 @@
 import express from 'express';
-import { crearTarea,listarTareasControlador } from '../controllers/controller_app';
+import { crearTarea, listarTareasControlador, actualizarTareaControlador, eliminarTareaControlador } from '../controllers/controller_app';
 
 const router = express.Router();
 
 router.post('/tasks', crearTarea);
 router.get('/tasks', listarTareasControlador);
-export default router;
+router.put('/tasks/:id', actualizarTareaControlador);
+router.delete('/tasks/:id', eliminarTareaControlador);
 
+export default router;
